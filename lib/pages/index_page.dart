@@ -11,6 +11,7 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
+
   final List<BottomNavigationBarItem> bottomTabs = [
     BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), title: Text('首页')),
     BottomNavigationBarItem(
@@ -34,6 +35,19 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(244, 245, 245, 1.0),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          items: bottomTabs,
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+              currentPage = tabPages[currentIndex];
+            });
+          }),
+      body: currentPage,
+    );
   }
 }
