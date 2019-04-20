@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage>
     var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Scaffold(
       appBar: AppBar(
-        title: Text('百姓生活+'),
+        title: Text('百姓生活+', style: TextStyle(color: Colors.white)),
       ),
       body: FutureBuilder(
           future: request('homePageContent', formData: formData),
@@ -247,6 +247,7 @@ class TopNavigator extends StatelessWidget {
       height: ScreenUtil().setWidth(320),
       padding: EdgeInsets.all(3),
       child: GridView.count(
+        physics: NeverScrollableScrollPhysics(), //禁止滚动  解决与上拉加载冲突问题
         crossAxisCount: 5,
         padding: EdgeInsets.all(5),
         children: navigatorList.map((item) {

@@ -19,7 +19,7 @@ Future request(url, {formData}) async {
       response = await dio.post(servicePath[url], data: formData);
     }
     if (response.statusCode == 200) {
-      print('response.data=========> ${response.data}');
+      print('response.data=========> ${url} == ${response.data}');
       return response.data;
     } else {
       throw Exception('后端接口出现异常');
