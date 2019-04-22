@@ -28,6 +28,7 @@ dependencies:
   flutter_screenutil: ^0.5.2  #屏幕适配
   url_launcher: ^5.0.2  #拨打电话
   flutter_easyrefresh: ^1.2.7  #上下拉刷新
+  provide: ^1.0.2  #状态管理
 
 dev_dependencies:
   flutter_test:
