@@ -29,7 +29,7 @@ class _CategoryPageState extends State<CategoryPage> {
           children: <Widget>[
             LeftNavState(),
             Column(
-              children: <Widget>[RigghtNav()],
+              children: <Widget>[RigghtNav(), CagegoryGoods()],
             )
           ],
         ),
@@ -107,11 +107,15 @@ class _LeftNavStateState extends State<LeftNavState> {
       setState(() {
         list = categoryEntity.data;
       });
-      Provide.value<ChildCategoryProvide>(context).getChildCategory(list[0].bxMallSubDto);
+      Provide.value<ChildCategoryProvide>(context)
+          .getChildCategory(list[0].bxMallSubDto);
     });
   }
 }
 
+/**
+ * 右侧子分类
+ */
 class RigghtNav extends StatefulWidget {
   @override
   _RigghtNavState createState() => _RigghtNavState();
@@ -133,8 +137,7 @@ class _RigghtNavState extends State<RigghtNav> {
           scrollDirection: Axis.horizontal,
           itemCount: childCategoryProvide.childCategoryList.length,
           itemBuilder: (context, index) {
-            return _rightInkWell(
-                childCategoryProvide.childCategoryList[index]);
+            return _rightInkWell(childCategoryProvide.childCategoryList[index]);
           },
         ),
       );
@@ -152,5 +155,36 @@ class _RigghtNavState extends State<RigghtNav> {
         padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
       ),
     );
+  }
+}
+
+/**
+ * 商品列表
+ */
+class CagegoryGoods extends StatefulWidget {
+  @override
+  _CagegoryGoodsState createState() => _CagegoryGoodsState();
+}
+
+class _CagegoryGoodsState extends State<CagegoryGoods> {
+  @override
+  void initState() {
+    super.initState();
+    _getGoodsList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text('商品列表'),
+    );
+  }
+
+  void _getGoodsList() async {
+    var formData = {'categoryId': '4', 'CategorySubId': "", 'page': 1};
+    await request('getMallGoods', formData: formData).then((val) {
+      var data = json.decode(val.toString());
+      print('ddddddddddddd-----------$data');
+    });
   }
 }
