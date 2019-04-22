@@ -38,8 +38,12 @@ class _HomePageState extends State<HomePage>
     print('设备宽度：${ScreenUtil.screenWidth})');
     var formData = {'lon': '115.02932', 'lat': '35.76189'};
     return Scaffold(
-      appBar: AppBar(
-        title: Text('百姓生活+', style: TextStyle(color: Colors.white)),
+      appBar: PreferredSize(
+        child: AppBar(
+          title: Text('百姓生活+',
+              style: TextStyle(color: Colors.white, fontSize: 18)),
+        ),
+        preferredSize: Size.fromHeight(55),
       ),
       body: FutureBuilder(
           future: request('homePageContent', formData: formData),

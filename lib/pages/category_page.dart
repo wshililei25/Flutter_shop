@@ -16,9 +16,12 @@ class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('商品分类', style: TextStyle(color: Colors.white)),
-      ),
+      appBar: PreferredSize(
+          child: AppBar(
+            title: Text('商品分类',
+                style: TextStyle(color: Colors.white, fontSize: 18)),
+          ),
+          preferredSize: Size.fromHeight(55)),
       body: Container(
         child: Row(
           children: <Widget>[LeftNavState()],
