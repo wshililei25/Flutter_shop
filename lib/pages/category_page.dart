@@ -278,7 +278,9 @@ class _CagegoryGoodsState extends State<CagegoryGoods> {
 
   Widget _listItem(List newList, index) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+
+      },
       child: Container(
         padding: EdgeInsets.only(top: 5, bottom: 5),
         decoration: BoxDecoration(

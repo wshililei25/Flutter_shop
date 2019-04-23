@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import '../router/appliction.dart';
+import '../router/routers.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -112,24 +114,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  /**
-   * 获取热卖商品
-   */
-/*  void _getHotGoods() {
-    var formData = {'page': page};
-    request('homePageBelowConten', formData: formData).then((val) {
-      var data = json.decode(val.toString());
-      List<Map> newGoodsList = (data['data'] as List).cast();
-      setState(() {
-        hotGoodsList.addAll(newGoodsList);
-        page++;
-      });
-    });
-  }*/
-
   Widget _hotTitle() {
     return Container(
-//        margin: EdgeInsets.only(top: 10),
         alignment: Alignment.center,
         color: Colors.transparent,
         padding: EdgeInsets.all(10),
@@ -140,7 +126,10 @@ class _HomePageState extends State<HomePage>
     if (hotGoodsList.length != 0) {
       List<Widget> listWidget = hotGoodsList.map((val) {
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            Application.router.navigateTo(
+                context, '${Routes.goodsDetailPage}?id=${val['goodsId']}');
+          },
           child: Container(
             width: ScreenUtil().setWidth(370),
             color: Colors.white,
