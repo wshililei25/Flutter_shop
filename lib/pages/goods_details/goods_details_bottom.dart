@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../provide/cart_provide.dart';
-import '../../provide/goods_details_provide.dart';
 import 'package:provide/provide.dart';
+
+import '../../provide/cart_provide.dart';
+import '../../provide/current_index.dart';
+import '../../provide/goods_details_provide.dart';
 
 class GoodsDetailsBottom extends StatelessWidget {
   @override
@@ -18,14 +20,45 @@ class GoodsDetailsBottom extends StatelessWidget {
       color: Colors.white,
       child: Row(
         children: <Widget>[
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 90,
-              alignment: Alignment.center,
-              child:
-                  Icon(Icons.shopping_cart, size: 25, color: Colors.pink[100]),
-            ),
+          Stack(
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  //跳转到购物车
+                  Provide.value<CurrentIndexProvide>(context).changeIndex(2);
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  width: 90,
+                  alignment: Alignment.center,
+                  child: Icon(Icons.shopping_cart,
+                      size: 25, color: Colors.pink[100]),
+                ),
+              ),
+              Provide<CartProvide>(
+                builder: (context, child, val) {
+                  int goodsCount = Provide.value<CartProvide>(context).allCount;
+                  //定位到相邻weidget的具体相对位置
+                  return Positioned(
+                    top: 0,
+                    right: 10,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(6, 3, 6, 3),
+                      decoration: BoxDecoration(
+                          color: Colors.pink[100],
+                          border: Border.all(width: 2, color: Colors.white),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Text(
+                        goodsCount.toString(),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: ScreenUtil().setSp(22)),
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
           ),
           InkWell(
             onTap: () async {
@@ -49,7 +82,7 @@ class GoodsDetailsBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              Provide.value<CartProvide>(context).remove();
+              await Provide.value<CartProvide>(context).remove();
             },
             child: Container(
                 width: ScreenUtil().setWidth(282),

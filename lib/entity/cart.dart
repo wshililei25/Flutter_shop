@@ -4,9 +4,10 @@ class CartEntity {
   int count;
   double price;
   String image;
+  bool isCheck;
 
   CartEntity(
-      {this.goodsId, this.goodsName, this.count, this.price, this.image});
+      {this.goodsId, this.goodsName, this.count, this.price, this.image,this.isCheck});
 
   CartEntity.fromJson(Map<String, dynamic> json) {
     goodsId = json['goodsId'];
@@ -14,6 +15,7 @@ class CartEntity {
     count = json['count'];
     price = json['price'];
     image = json['image'];
+    isCheck = json['isCheck'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,8 @@ class CartEntity {
     data['count'] = this.count;
     data['price'] = this.price;
     data['image'] = this.image;
+    data['isCheck'] = this.isCheck;
     return data;
   }
+
 }
